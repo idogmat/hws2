@@ -15,13 +15,11 @@ export const homeWorkReducer = (state: UserType[], action: ActionType): UserType
                     return stateCopy.sort(compare).reverse()
             }
             return stateCopy
-
-        return stateCopy
         case 'check':
             let stateCopy1=[...state]
             switch (action.payload){
                 case 18:
-                    return stateCopy1.filter(u=>u.age>18)
+                    return stateCopy1.filter(u=>u.age>=18)
             }
             return stateCopy1
 
