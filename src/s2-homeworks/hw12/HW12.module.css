@@ -9,6 +9,22 @@
 }
 
 [data-theme='3'] {
+    --color: #000000;
+    --background: #002046;
+}
+[data-theme='4'] {
+    --color: #090505;
+    --background: #01a611;
+}
+[data-theme='5'] {
+    --color: #bb1515;
+    --background: #bd971c;
+}
+[data-theme='6'] {
+    --color: #2e3cda;
+    --background: #dc0375;
+}
+[data-theme='7'] {
     --color: #FFFFFF;
     --background: #212A34;
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import SuperButton from '../hw04/common/c2-SuperButton/SuperButton'
 import {restoreState} from '../hw06/localStorage/localStorage'
 import s from './Clock.module.css'
@@ -9,15 +9,31 @@ function Clock() {
     const [date, setDate] = useState<Date>(new Date(restoreState('hw9-date', Date.now())))
     const [show, setShow] = useState<boolean>(false)
 
+    // useEffect(()=>{
+    //     let id = setInterval(()=>{
+    //         setDate(new Date())
+    //     },1000)
+    //     return ()=>{
+    //         console.log('killClock')
+    //         clearInterval(id)
+    //     }
+    // },[])
+    let id:any;
     const start = () => {
         // пишут студенты // запустить часы (должно отображаться реальное время, а не +1)
         // сохранить ид таймера (https://learn.javascript.ru/settimeout-setinterval#setinterval)
-        let id = setInterval(() => {
+        id = setInterval(() => {
             setDate(new Date())
         }, 1000)
         setTimerId(+id)
+        console.log(id)
     }
-
+    useEffect(()=>{
+        return ()=>{
+            console.log('killClock')
+            id?.clearInterval(id)
+        }
+    },[])
     const stop = () => {
         // пишут студенты // поставить часы на паузу, обнулить ид таймера (timerId <- undefined)
         clearInterval(timerId)
