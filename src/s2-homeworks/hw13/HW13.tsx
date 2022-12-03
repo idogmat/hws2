@@ -40,9 +40,20 @@ const HW13 = () => {
 
             })
             .catch((e) => {
+                console.log(e)
+                if(e.code==="ERR_NETWORK"){
+                    setCode('unknown error')
+                    setImage(errorUnknown)
+                }else if(e.response.status===500) {
+                    setCode('Код 500!')
+                    setImage(error500)
+                } else if(e.response.status===400){
+                    setCode('Код 400!')
+                    setImage(error400)
+                }
                 // дописать
 
-            })
+            }).finally(()=>setInfo(''))
     }
 
     return (
@@ -55,7 +66,7 @@ const HW13 = () => {
                         id={'hw13-send-true'}
                         onClick={send(true)}
                         xType={'secondary'}
-                        // дописать
+                        disabled={!!info}
 
                     >
                         Send true
@@ -64,7 +75,7 @@ const HW13 = () => {
                         id={'hw13-send-false'}
                         onClick={send(false)}
                         xType={'secondary'}
-                        // дописать
+                        disabled={!!info}
 
                     >
                         Send false
@@ -73,7 +84,7 @@ const HW13 = () => {
                         id={'hw13-send-undefined'}
                         onClick={send(undefined)}
                         xType={'secondary'}
-                        // дописать
+                        disabled={!!info}
 
                     >
                         Send undefined
@@ -82,7 +93,7 @@ const HW13 = () => {
                         id={'hw13-send-null'}
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
-                        // дописать
+                        disabled={!!info}
 
                     >
                         Send null
