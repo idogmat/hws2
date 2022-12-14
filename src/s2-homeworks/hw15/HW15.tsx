@@ -24,9 +24,9 @@ type TechType = {
 const getTechs = (params: any) => {
     return axios
         .get<{ techs: TechType[], totalCount: number }>(
-            'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test3',
+            `https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test3`,
             {params}
-        )
+        ).then(e=>e.data)
         .catch((e) => {
             alert(e.response?.data?.errorText || e.message)
         })
@@ -44,9 +44,11 @@ const HW15 = () => {
     const sendQuery = (params: any) => {
         setLoading(true)
         getTechs(params)
-            .then((res) => {
+            .then((res:{ techs: TechType[], totalCount: number }|any) => {
+                console.log(res.techs)
                 // делает студент
-
+                setTechs(res.techs)
+                setTotalCount(res.totalCount)
                 // сохранить пришедшие данные
 
                 //
@@ -55,13 +57,14 @@ const HW15 = () => {
 
     const onChangePagination = (newPage: number, newCount: number) => {
         // делает студент
-
         // setPage(
         // setCount(
-
+            setPage(newPage)
+            setCount(newCount)
         // sendQuery(
+        sendQuery({page: page, count:count})
         // setSearchParams(
-
+        setSearchParams(page+'')
         //
     }
 
@@ -70,10 +73,12 @@ const HW15 = () => {
 
         // setSort(
         // setPage(1) // при сортировке сбрасывать на 1 страницу
-
+        setPage(page-1)
+        setSort(newSort)
         // sendQuery(
+        sendQuery(sort)
         // setSearchParams(
-
+            setSearchParams(page+"")
         //
     }
 
