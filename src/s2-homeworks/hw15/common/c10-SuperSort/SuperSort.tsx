@@ -15,32 +15,14 @@ export type SuperSortPropsType = {
 }
 
 export const pureChange = (sort: string, down: string, up: string) => {
-    const remover=(a:any)=>a.replace(/[0-1]/g, "")
-    // console.log(remover(sort),'sort')
-    // console.log(remover(up),'up')
-    // console.log(remover(down),'down')
-    // console.log(sort,'sort')
-    // console.log(up,'up')
-    // console.log(down,'down')
-    // if(remover(sort)===remover(up) && remover(sort)===remover(down)) return ''
-    if(sort === '') {
-        return down
-    }else if(sort!==down && sort===up){
-            return ''
-    } else if(sort===down){
-        return up
-    } else if(sort===up){
-        return sort
-    }if(sort!==down){
-        return down
-    }
-    return sort
+    return sort==='' ? down : (sort!==down && sort===up) ? '' : sort===down ? up : sort===up ? sort : down
+    // return remover(sort) === remover(down) ? remover(up) : remover(sort) === remover(up) ? '' : remover(down)
     // if(remover(up)===remover(down)) return down
     // if(remover(up)===remover(sort)) return 'developer'
     // if(remover(down)==='tech') return 'tech'
 
     // console.log(sort,down,up)
-
+    // return down
     // пишет студент, sort: (click) => down (click) => up (click) => '' (click) => down ...
 
 }
